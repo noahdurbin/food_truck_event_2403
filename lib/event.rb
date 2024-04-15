@@ -41,4 +41,10 @@ class Event
     end
     total_inventory
   end
+
+  def overstocked_items
+    total_inventory.select do |item, item_info|
+      item_info[:quantity] > 50 && item_info[:food_trucks].count > 1
+    end.keys
+  end
 end
