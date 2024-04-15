@@ -45,8 +45,8 @@ RSpec.describe FoodTruck do
       item1 = Item.new({name: 'Peach Pie (Slice)', price: "$3.75"})
       item2 = Item.new({name: 'Apple Pie (Slice)', price: '$2.50'})
       item3 = Item.new({name: 'Peach-Raspberry Nice Cream', price: '$5.30'}) 
-      food_truck1.stock(item1, 35)
-      food_truck1.stock(item2, 7)   
+      food_truck.stock(item1, 35)
+      food_truck.stock(item2, 7)   
 
       expect(food_truck.potential_revenue).to eq(148.75)
     end
