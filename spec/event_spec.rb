@@ -19,4 +19,5 @@ RSpec.describe Event do
 
       expect(event.food_trucks).to eq([])
     end
+  end
 end
