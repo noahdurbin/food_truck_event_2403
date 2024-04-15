@@ -22,4 +22,29 @@ class Event
       food_truck.inventory.include?(item)
     end
   end
+
+  def sorted_items_list
+    @food_trucks.flat_map do |food_truck|
+      food_truck.inventory.map do |item, price|
+        item.name
+      end
+    end.uniq.sort
+  end
+
+  def total_inventory
+    total_inventory = Hash.new { |hash, key| hash[key] = {quantity: 0, food_trucks: []} }
+    @food_trucks.each do |food_truck|
+      food_truck.inventory.each do |item, amount|
+        total_inventory[item][:quantity] += amount
+        total_inventory[item][:food_trucks].push(food_truck)
+      end
+    end
+    total_inventory
+  end
+
+  def overstocked_items
+    total_inventory.select do |item, item_info|
+      item_info[:quantity] > 50 && item_info[:food_trucks].count > 1
+    end.keys
+  end
 end
