@@ -28,6 +28,17 @@ class Event
       food_truck.inventory.map do |item, price|
         item.name
       end
-    end.sort
+    end.uniq.sort
+  end
+
+  def total_inventory
+    total_inventory = Hash.new { |hash, key| hash[key] = {quantity: 0, food_trucks: []} }
+    @food_trucks.each do |food_truck|
+      food_truck.inventory.each do |item, amount|
+        total_inventory[item][:quantity] += amount
+        total_inventory[item][:food_trucks].push(food_truck)
+      end
+    end
+    total_inventory
   end
 end
