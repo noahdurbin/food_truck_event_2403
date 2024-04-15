@@ -22,4 +22,12 @@ class Event
       food_truck.inventory.include?(item)
     end
   end
+
+  def sorted_items_list
+    @food_trucks.flat_map do |food_truck|
+      food_truck.inventory.map do |item, price|
+        item.name
+      end
+    end.sort
+  end
 end
